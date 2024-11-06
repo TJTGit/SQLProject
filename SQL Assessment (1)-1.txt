@@ -1,0 +1,79 @@
+1.Select top 10 records from Employee table where Emp_Sal > 10000
+Answer:  
+	Select Top 10 *
+	From  Employee
+	Where Emp_Sal > 10000; 
+
+
+
+2.Retrieve Emp_Id, Emp_FName, Emp_Addr1, Emp_City, Emp_Zip, Dept_Name, Dept_City From Employee whose Department City is Brentwood. Use Table Alias
+Answer: 
+	Select Emp_Id, Emp_FName, Emp_Addr1, Emp_City, Emp_Zip, Dept_Name, Dept_City 
+	From Employee AS Emp
+	Where Department_City = 'Brentwood';
+
+
+3.Retrieve Emp_ID, Emp_Fname, Emp_Zip from Employee who are all working in department HR&Training and Compliance. Use embedded SQL statments
+Answer:
+	Select Emp_ID, Emp_Fname, Emp_Zip
+	From Employee
+	Where Edept_ID = (
+	Select Dept_ID 
+	From Emp_Dept 
+	Where Dept_Name = 'HR&Training' AND 'Compliance')
+
+
+
+4.Retrieve Sum(Emp_Sal) and Dept_Name From Employee and Emp_Department by Dept_Name (Group By)
+Answer:
+	SELECT EDept_Name, SUM(Emp_Sal)
+	FROM Employee
+	WHERE EDept_Name IN (
+	SELECT Dept_Name 
+	FROM EMP_DEPARTMENT)
+	GROUP BY EDept_Name;
+
+	
+
+
+5.Select 2nd highest sal from Employee table
+Answer:
+	Select Emp_Sal
+	From Employee
+	Where Emp_Sal = (
+	Select MAX(Emp_Sal)
+	From Employee
+	Where Emp_Sal < (Select MAX(Emp_Sal) From Employee)
+	);
+
+ 
+6. Rename a column Person_Name to P_Name in the table Person
+Answer:
+	Select Person_Name AS P_Name
+	From   Person
+
+
+7.List down all the SQL constraints
+Answer:
+	(Primary Key, Foreign Key, Check, Default, Unique, Not Null, Create Index)
+
+8. Retrieve Emp_Id, Emp_FName, Emp_LName for location Zip_Code 88160 (use all three Employee tables) Use Embedded sql statements
+Answer:
+	SELECT Emp_Id, Emp_FName, Emp_LName
+	FROM Employee
+	WHERE [Emp_Zip] IN (SELECT Emp_Dept_Zip FROM EMP_DEPARTMENT WHERE Emp_Dept_Zip = (SELECT Zip_Code FROM Dept_Location WHERE Zip_Code = '88160'));
+
+
+9. Write a query using Right Outer join to retrieve the data from Employee and Emp_Department table
+Answer: 
+	SELECT E.Emp_ID, E.Emp_City, ED.Dept_Id, ED.Dept_City
+	FROM EMPLOYEE E
+	RIGHT JOIN EMP_DEPARTMENT ED
+	ON E.Emp_City = ED.Dept_City;
+
+10. Write a query using Full Outer join to retrieve the data from Employee and Emp_Department tables
+Answer: 
+	SELECT E.Emp_ID, E.Emp_City, ED.Dept_Id, ED.Dept_City
+	FROM EMPLOYEE E
+	FULL OUTER JOIN EMP_DEPARTMENT ED
+	ON E.Emp_City = ED.Dept_City;
