@@ -1,0 +1,49 @@
+CREATE TABLE EMPLOYEE 
+
+(Emp_ID Int,
+
+Emp_FName Varchar (50),
+Emp_LName Varchar (50),
+Emp_Addr1 Varchar (40),
+Emp_Zip Int,
+Emp_Sal Decimal(10,2),
+
+CONSTRAINT PK_EMPID PRIMARY KEY (Emp_ID))
+
+SELECT * FROM EMPLOYEE
+WHERE Emp_Sal<8000
+
+SELECT * 
+FROM [dbo].[EMPLOYEE]
+WHERE [Emp_FName] BETWEEN 'D' AND 'S'
+ORDER BY [Emp_FName]
+
+Select Emp_Zip, Count(Emp_Id), MAX(Emp_Id), AVG(Emp_Id) As CountofEmp 
+From EMPLOYEE
+Group By Emp_Zip
+
+SELECT *INTO Employee_103 
+FROM EMPLOYEE
+WHERE Emp_ID=103
+
+Select Emp_Id, Emp_Addr1,Emp_City, Emp_Zip 
+From Employee Where Edept_id IN (Select Dept_id from EMP_DEPARTMENT where Dept_City = 'Charlotte')
+
+Insert Into Employee 
+ (Emp_ID, Emp_FName, Emp_LName, Emp_Addr1,Emp_Addr2, Emp_City, Emp_Zip, Emp_Sal, EDept_Id)
+Values (131, 'Joe', 'Parsons', '1 Kilometer Dr', '8 Mile Path', 'Charlotte', 28277, 9000.00, 1003)
+
+Delete from Employee
+Where Emp_ID = 131
+
+Update  Employee 
+Set Emp_Addr2 = 'Blank'
+Where Emp_ID = 132
+
+Select Emp_ID,Emp_FName, Emp_LName, Emp_City, Emp_Sal, Dept_Name, Dept_City 
+From Employee 
+Inner Join EMP_Department 
+ON Employee.EDept_Id = EMP_DEPARTMENT.Dept_Id
+
+
+
